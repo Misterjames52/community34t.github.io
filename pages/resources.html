@@ -4,9 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: url('../assets/resources-bg.jpg') no-repeat center center/cover;
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 12px 18px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background: #ff6600;
+        }
+
+        /* Page Content */
+        .content {
+            padding: 100px 20px;
+            max-width: 900px;
+            margin: 120px auto;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .resources-list {
+            list-style: none;
+            text-align: left;
+            padding: 20px;
+        }
+
+        .resources-list li {
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .resources-list li:hover {
+            background: rgba(255, 102, 0, 0.7);
+        }
+
+        .resources-list a {
+            text-decoration: none;
+            color: #ffd700;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .resources-list a:hover {
+            color: white;
+        }
+
+        /* Icons */
+        .resource-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Header Shrinks on Scroll */
+        .shrink {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul li {
+                margin-bottom: 10px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .resources-list li {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
+
     <header>
         <h1>Resources</h1>
         <nav>
@@ -19,17 +162,56 @@
             </ul>
         </nav>
     </header>
-    <section>
+
+    <section class="content">
         <h2>Local Resources for Those in Need</h2>
-        <ul>
-            <li><strong>Food Banks:</strong> <a href="#">Jefferson County Food Pantry</a></li>
-            <li><strong>Emergency Shelter:</strong> No local shelter available (see <a href="help.html">How to Help</a> to change this!)</li>
-            <li><strong>Job Assistance:</strong> <a href="#">Workforce Development Center</a></li>
-            <li><strong>Clothing Donations:</strong> <a href="#">Local Church Clothing Drives</a></li>
+        <ul class="resources-list">
+            <li>
+                <img src="../assets/food-bank-icon.png" class="resource-icon" alt="Food Bank Icon">
+                <strong>Food Banks:</strong> <a href="#">Jefferson County Food Pantry</a>
+            </li>
+            <li>
+                <img src="../assets/shelter-icon.png" class="resource-icon" alt="Shelter Icon">
+                <strong>Emergency Shelter:</strong> No local shelter available (see <a href="help.html">How to Help</a> to change this!)
+            </li>
+            <li>
+                <img src="../assets/job-assistance-icon.png" class="resource-icon" alt="Job Assistance Icon">
+                <strong>Job Assistance:</strong> <a href="#">Workforce Development Center</a>
+            </li>
+            <li>
+                <img src="../assets/clothing-donation-icon.png" class="resource-icon" alt="Clothing Donation Icon">
+                <strong>Clothing Donations:</strong> <a href="#">Local Church Clothing Drives</a>
+            </li>
         </ul>
     </section>
+
     <footer>
         <p>&copy; 2025 Festus Community Outreach | All Rights Reserved</p>
     </footer>
+
+    <script>
+        // Shrink Header on Scroll
+        window.addEventListener("scroll", function () {
+            let header = document.querySelector("header");
+            if (window.scrollY > 50) {
+                header.classList.add("shrink");
+            } else {
+                header.classList.remove("shrink");
+            }
+        });
+
+        // Highlight Active Navigation Link
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentPath = window.location.pathname;
+            let navLinks = document.querySelectorAll("nav ul li a");
+
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === currentPath) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

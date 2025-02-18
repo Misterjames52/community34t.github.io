@@ -4,9 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Stories</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: url('../assets/stories-bg.jpg') no-repeat center center/cover;
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 12px 18px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background: #ff6600;
+        }
+
+        /* Stories Section */
+        .stories-container {
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: 150px auto;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .stories-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .story-card {
+            background: rgba(255, 102, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .story-card:hover {
+            transform: scale(1.05);
+        }
+
+        .story-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .story-content {
+            display: none;
+            font-size: 1rem;
+        }
+
+        .story-card img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul li {
+                margin-bottom: 10px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+
     <header>
         <h1>Community Stories</h1>
         <nav>
@@ -19,20 +148,49 @@
             </ul>
         </nav>
     </header>
-    <section>
+
+    <section class="stories-container">
         <h2>Real Stories from Festus</h2>
         <p>Here are stories from people who have experienced homelessness and how our community helped them.</p>
-        <article>
-            <h3>John's Story</h3>
-            <p>John lost his home after an injury left him unable to work. Thanks to community donations, he found housing and job assistance.</p>
-        </article>
-        <article>
-            <h3>Mary’s Journey</h3>
-            <p>Mary was living in her car before a local church helped her find shelter and food. She now works with others facing the same struggles.</p>
-        </article>
+
+        <div class="story-card" onclick="toggleStory('story1')">
+            <img src="../assets/john-story.jpg" alt="John's Story">
+            <h3 class="story-title">John's Story</h3>
+            <p class="story-content" id="story1">John lost his home after an injury left him unable to work. Thanks to community donations, he found housing and job assistance.</p>
+        </div>
+
+        <div class="story-card" onclick="toggleStory('story2')">
+            <img src="../assets/mary-story.jpg" alt="Mary’s Journey">
+            <h3 class="story-title">Mary’s Journey</h3>
+            <p class="story-content" id="story2">Mary was living in her car before a local church helped her find shelter and food. She now works with others facing the same struggles.</p>
+        </div>
     </section>
+
     <footer>
         <p>&copy; 2025 Festus Community Outreach | All Rights Reserved</p>
     </footer>
+
+    <script>
+        // Function to Toggle Story Details
+        function toggleStory(storyId) {
+            let story = document.getElementById(storyId);
+            if (story.style.display === "none" || story.style.display === "") {
+                story.style.display = "block";
+            } else {
+                story.style.display = "none";
+            }
+        }
+
+        // Shrink Header on Scroll
+        window.addEventListener("scroll", function () {
+            let header = document.querySelector("header");
+            if (window.scrollY > 50) {
+                header.classList.add("shrink");
+            } else {
+                header.classList.remove("shrink");
+            }
+        });
+    </script>
+
 </body>
 </html>
