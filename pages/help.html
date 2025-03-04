@@ -89,14 +89,22 @@
             gap: 10px;
         }
 
-        .help-list li:hover {
-            background: rgba(255, 102, 0, 0.7);
-        }
-
         .help-list img {
             width: 40px;
             height: 40px;
             border-radius: 50%;
+        }
+
+        .help-list a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .help-list a:hover {
+            text-decoration: underline;
         }
 
         /* Donation Button */
@@ -125,10 +133,41 @@
             margin-top: 50px;
         }
 
-        /* Header Shrinks on Scroll */
-        .shrink {
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.9);
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 15% auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: black;
+        }
+
+        .close-btn:hover {
+            color: red;
         }
 
         /* Responsive Design */
@@ -174,21 +213,22 @@
         <ul class="help-list">
             <li>
                 <img src="../assets/volunteer-icon.png" alt="Volunteer Icon">
-                Volunteering at a food drive
+                <a onclick="showModal('volunteer')">Volunteering at a food drive</a>
             </li>
             <li>
                 <img src="../assets/donation-icon.png" alt="Donation Icon">
-                Donating clothing, blankets, or money
+                <a onclick="showModal('donate')">Donating clothing, blankets, or money</a>
             </li>
             <li>
                 <img src="../assets/advocacy-icon.png" alt="Advocacy Icon">
-                Advocating for more resources in Festus
+                <a onclick="showModal('advocacy')">Advocating for more resources in Festus</a>
             </li>
             <li>
                 <img src="../assets/partnership-icon.png" alt="Partnership Icon">
-                Partnering with local businesses to support homeless individuals
+                <a onclick="showModal('partners')">Partnering with local businesses</a>
             </li>
         </ul>
+
         <a href="#" class="btn">Donate Now</a>
     </section>
 
@@ -196,28 +236,33 @@
         <p>&copy; 2025 Festus Community Outreach | All Rights Reserved</p>
     </footer>
 
+    <!-- Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-text"></div>
+        </div>
+    </div>
+
     <script>
-        // Shrink Header on Scroll
-        window.addEventListener("scroll", function () {
-            let header = document.querySelector("header");
-            if (window.scrollY > 50) {
-                header.classList.add("shrink");
-            } else {
-                header.classList.remove("shrink");
-            }
-        });
+        function showModal(topic) {
+            let modalText = document.getElementById('modal-text');
+            let modal = document.getElementById('helpModal');
 
-        // Highlight Active Navigation Link
-        document.addEventListener("DOMContentLoaded", function () {
-            let currentPath = window.location.pathname;
-            let navLinks = document.querySelectorAll("nav ul li a");
+            let content = {
+                'volunteer': `<h3>Volunteer at a Food Drive</h3><p>Help distribute food to families in need. Check our <a href="resources.html">Resources Page</a>.</p>`,
+                'donate': `<h3>Make a Donation</h3><p>Donate clothing, blankets, or funds to support those in need. Visit our <a href="donate.html">Donation Page</a>.</p>`,
+                'advocacy': `<h3>Advocate for More Resources</h3><p>Join local advocacy groups to support homeless individuals.</p>`,
+                'partners': `<h3>Partner with Local Businesses</h3><p>We collaborate with businesses to provide support. Contact us.</p>`
+            };
 
-            navLinks.forEach(link => {
-                if (link.getAttribute("href") === currentPath) {
-                    link.classList.add("active");
-                }
-            });
-        });
+            modalText.innerHTML = content[topic];
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('helpModal').style.display = "none";
+        }
     </script>
 
 </body>
